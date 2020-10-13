@@ -1,28 +1,37 @@
-===Database hotel
+--Seleziona tutti gli ospiti che sono stati identificati con la carta di identità
 
-== Table structure for table ospiti
+SELECT * 
+FROM `ospiti` 
+WHERE `document_type`= 'CI'
 
-|------
-|Column|Type|Null|Default
-|------
-|//**id**//|int(10)|No|
-|name|varchar(255)|No|
-|lastname|varchar(255)|No|
-|date_of_birth|datetime|No|
-|document_type|varchar(1024)|No|
-|document_number|varchar(1024)|No|
-|created_at|timestamp|Yes|NULL
-|updated_at|timestamp|Yes|NULL
-== Dumping data for table ospiti
+--Seleziona tutti gli ospiti che sono nati dopo il 1988
 
-|Elizabeth|Romaguera|2005-03-12 10:37:05
-|Jacquelyn|Ankunding|1992-11-19 06:15:10
-|Tristian|Koss|2003-01-27 03:01:13
-|Kamron|Murphy|2002-12-17 15:29:31
-|Helene|Hansen|2000-02-24 12:21:08
-|Dion|Leannon|1993-09-22 15:41:21
-|Emilie|Grant|2010-12-18 14:22:44
-|Laurence|Green|2008-12-25 13:42:07
-|Dandre|Kautzer|1988-05-22 08:37:49
-|Nikita|Donnelly|2001-12-26 02:54:30
-|Gillian|Reichel|2000-09-01 03:03:09
+SELECT `name`,`lastname`,`date_of_birth`
+FROM `ospiti` 
+WHERE `date_of_birth`>= '1988-01-01';
+
+--Seleziona tutti gli ospiti il cui nome inizia con la D
+
+SELECT `name`,`lastname`
+FROM `ospiti` 
+WHERE `name` LIKE 'D%';
+
+--Seleziona gli ospiti riconosciuti con patente e nati nel 1975
+
+SELECT `name`,`lastname`,`date_of_birth`,`document_type`
+FROM `ospiti` 
+WHERE `date_of_birth` >= '1975-01-01'
+AND `date_of_birth` <= '1975-12-31'
+AND `document_type`= 'Driver License';
+
+--Quanti posti letto ha l’hotel in totale?Quanti posti letto ha l’hotel in totale?
+
+SELECT COUNT(`id`) AS `total_beds_number`
+FROM `stanze` 
+WHERE `beds`;
+
+--Calcola il totale degli ordini accepted
+
+SELECT COUNT(`id`) AS `accepted_order`
+FROM  `pagamenti`
+WHERE `status` = 'accepted;

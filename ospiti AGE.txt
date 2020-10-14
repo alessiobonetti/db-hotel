@@ -24,14 +24,17 @@ WHERE `date_of_birth` >= '1975-01-01'
 AND `date_of_birth` <= '1975-12-31'
 AND `document_type`= 'Driver License';
 
---Quanti posti letto ha l’hotel in totale?Quanti posti letto ha l’hotel in totale?
+--Quanti posti letto ha l’hotel in totale?
 
-SELECT COUNT(`id`) AS `total_beds_number`
-FROM `stanze` 
-WHERE `beds`;
+SELECT SUM(`beds`) AS `total_beds_number`
+FROM `stanze`
 
 --Calcola il totale degli ordini accepted
 
 SELECT COUNT(`id`) AS `accepted_order`
 FROM  `pagamenti`
-WHERE `status` = 'accepted;
+WHERE `status` = 'accepted';
+
+SELECT SUM (`price`)
+FROM `pagamenti`
+WHERE status = `accepted`;

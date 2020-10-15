@@ -1,26 +1,31 @@
 --Conta gli ospiti raggruppandoli per anno di nascita
-non ci riesco
+
+SELECT COUNT(`id`), YEAR(`date_of_birth`)
+FROM `ospiti`
+GROUP BY  YEAR(`date_of_birth`)
 
 --Somma i prezzi dei pagamenti raggruppandoli per status
-non ci riesco
 
 SELECT SUM(`price`),`status` AS 'total_payements'
 FROM `pagamenti`
 GROUP BY `status`;
 
 --Conta quante volte è stata prenotata ogni stanza
-non funziona ma è quella che si avvicina di più
 
-SELECT COUNT(`stanza_id`),`stanza_id` AS 'howManyTimes' 
+SELECT COUNT(`id`) AS 'howManyTimes',`stanza_id` 
 FROM `prenotazioni` 
 GROUP BY `stanza_id`;
 
 --Fai una analisi per vedere se ci sono ore in cui le prenotazioni sono più frequenti
 
-non so nemmeno da dove iniziare
+SELECT COUNT(`id`) AS 'totale_prenotazioni', HOUR(`created_us`) AS 'orario' 
+FROM `prenotazioni`
+GROUP BY (HOUR(`created_at`))
+ORDER BY `tot_prenotazioni` DESC;
 
 --Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni
-non capisco perchè non va
-SELECT MAX (`ospite_id`)
+
+SELECT COUNT (`id`) AS 'totale_prenotazioni' ,(`ospite_id`)
 FROM `prenotazioni_has_ospiti`
-WHERE SUM (`ospite_id`)GROUP BY `ospite_id`
+GROUP BY (`ospite_id`)
+ORDER BY `totale:prenotazioni` DESC;
